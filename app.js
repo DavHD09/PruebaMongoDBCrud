@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const express = require('express');
+const cors = require("cors");
+
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 const url = "mongodb+srv://DavHD:PhmFRjvYHmaSB4P@misiontic.d2mqp.mongodb.net/barbershop?retryWrites=true&w=majority";
 
@@ -22,6 +28,10 @@ const mostrar = async ()=>{
     const RegistrosTotales = await PersonasModel.find();
     console.log(RegistrosTotales)
 }
+// const mostrarEspecifico = async (Nick) =>{
+//     const RegistroEspecifico = await PersonasModel.findOne({Nickname:Nick});
+// }
+
 const crear = async ()=>{
     const personas = new PersonasModel({
         Documento:'1067968154853',
@@ -50,3 +60,16 @@ const eliminar = async (Nick)=>{
 //crear()
 //actualizar('joselo')
 //eliminar('pedrito')
+//mostrarEspecifico('DavHD');
+
+app.get("/personas/:Nickname", async function (req, res) {
+    // find es una funcion que ayuda a buscar dentro de un array
+    // req, trael la consulta con el parametro deseado
+    const personas = await PersonasModel.findOne({Nickname:req.params.Nickname})
+    console.log(personas)
+    res.send(personas);
+})
+
+app.listen(9000, () => {
+    console.log(`Backend corriendo por el puerto 9000`)
+})

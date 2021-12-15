@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+        <form>
+            <div class="row mt-5">
+                <div class="col">
+                    <label> Nombre: </label>
+                    <input class="form-control" id="Nombre" placeholder="Nombre"/>
+                </div>
+                <div class="col">
+                    <label> Apellido: </label>
+                    <input class="form-control" id="Apellido" placeholder="Apellido"/>
+                </div>
+                <div class="col">
+                    <label> Nickname: </label>
+                    <input class="form-control" id="Nickname" placeholder="Nickname"/>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <button type="button" onclick="consultar()"> Consultar por nickname </button>
+            </div>
+        </form>
+    
+    </body>
+    <script>
+        
+        var host = "http://localhost:9000";
+        function consultar() {    
+
+        const Nickname = document.getElementById("Nickname").value;
+        console.log(Nickname);
+        fetch(`${host}/personas/${Nickname}`)
+            .then(res => res.json())            
+            .then(res => {
+                console.log(res);
+                document.getElementById("Nombre").value = res.nombres;
+                document.getElementById("Apellido").value = res.apellidos;               
+            })
+        
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</html>
