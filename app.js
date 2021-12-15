@@ -44,7 +44,7 @@ const crear = async ()=>{
     console.log(resultados)
 }
 const actualizar = async (Nick)=>{
-    const persona = await PersonasModel.updateOne({Nickname:Nick},
+    const persona = await PersonasModel.updateOne({nickname:Nick},
     {
         $set:{
             nombres:'juan mecanico',
@@ -53,7 +53,7 @@ const actualizar = async (Nick)=>{
     })
 }
 const eliminar = async (Nick)=>{
-    const persona = await PersonasModel.deleteOne({Nickname:Nick})
+    const persona = await PersonasModel.deleteOne({nickname:Nick})
     console.log(persona);
 }
 //mostrar()
@@ -62,10 +62,10 @@ const eliminar = async (Nick)=>{
 //eliminar('pedrito')
 //mostrarEspecifico('DavHD');
 
-app.get("/personas/:Nickname", async function (req, res) {
+app.get("/personas/:nickname", async function (req, res) {
     // find es una funcion que ayuda a buscar dentro de un array
     // req, trael la consulta con el parametro deseado
-    const personas = await PersonasModel.findOne({Nickname:req.params.Nickname})
+    const personas = await PersonasModel.findOne({nickname:req.params.nickname})
     console.log(personas)
     res.send(personas);
 })

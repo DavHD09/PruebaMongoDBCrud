@@ -33,14 +33,14 @@
         var host = "http://localhost:9000";
         function consultar() {    
 
-        const Nickname = document.getElementById("Nickname").value;
-        console.log(Nickname);
-        fetch(`${host}/personas/${Nickname}`)
+        const nickname = document.getElementById("Nickname").value;
+        console.log(nickname);
+        fetch(`${host}/personas/${nickname}`)
             .then(res => res.json())            
             .then(res => {
                 console.log(res);
-                document.getElementById("Nombre").value = res.nombres;
-                document.getElementById("Apellido").value = res.apellidos;               
+                document.getElementById("Nombre").value = res.nombre;
+                document.getElementById("Apellido").value = res.apellido;               
             })
         
     }
